@@ -100,42 +100,34 @@ let array = [{"id":1,"firstName":"Osmond","surName":"Kieran","sex":"Male","age":
     {"id":100,"firstName":"Dorothy","surName":"Cowin","sex":"Female","age":34,"isVegetarian":false,"langCount":8}]
 
 const averageAge = (arr) => {
-    let sum = 0;
-    let count = 0;
-    arr.forEach(i => {
-        sum += i["age"];
-        count++;
-    });
-    return sum/count;
+    return arr.reduce((res, next, index, array) => {
+        res += next.age;
+        return index === array.length-1 ? res/array.length : res;
+    }, 0);
 }
 const maxLang = (arr) => {
-    let max = Number.MIN_VALUE;
-    arr.forEach(i => {
-        if(max < i["langCount"])
-            max = i["langCount"];
-    });
-    return max;
+    return arr.reduce((res, next) => {
+        res = res >= next.langCount ? res : next.langCount;
+        return res;
+    }, 0);
 }
-const countMaleFemale = (arr) => {
-    let countM = 0;
-    let countF = 0;
-    arr.forEach(i => {
-        if(i["sex"] === "Male")
-            ++countM;
-        else ++countF;
-    });
-    let result = new Map();
-    result.set("countM", countM);
-    result.set("countF", countF);
+const countMale = (arr) => {
+    return arr.reduce((res, next) => {
+        return next.sex === "Male" ? ++res : res;
+    }, 0);
+}
+const countFemale = (arr) => {
+    return arr.reduce((res, next) => {
+        return next.sex === "Female" ? ++res : res;
+    }, 0);
+}
 
-    return result;
-}
 document.getElementById("result-average-age").innerHTML += averageAge(array);
 document.getElementById("result-max-lang").innerHTML = maxLang(array);
 
-let count = countMaleFemale(array);
-document.getElementById("result-count-male").innerHTML = count.get("countM");
-document.getElementById("result-count-female").innerHTML = count.get("countF");
+
+document.getElementById("result-count-male").innerHTML = countMale(array);
+document.getElementById("result-count-female").innerHTML = countFemale(array);
 
 
 localStorage.setItem("people", JSON.stringify(array));
@@ -147,7 +139,6 @@ let tbody = document.createElement("tbody");
 
 people.forEach(i => {
     let tr = document.createElement("tr");
-    console.log(i);
     for (let key in i) {
         let td = document.createElement("td");
         td.innerText = i[key];
@@ -156,3 +147,4 @@ people.forEach(i => {
     tbody.appendChild(tr);
 })
 table.appendChild(tbody);
+
