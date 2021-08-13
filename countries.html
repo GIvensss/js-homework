@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-6">
+        <h1>CHECK EURO COUNTRY <small>(only Cyrillic symbols)</small></h1>
+        <div class="input-group">
+            <input class="input-text" type="text" id="country" placeholder="Name of country">
+            <input type="button" value="check" onclick="checkCountry()">
+        </div>
+    </div>
+</div>
+
+</div>
+<div class="text-success valid"></div>
+<div class="text-warning invalid"></div>
+<div id="image">
+
+</div>
+<script src="countries.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+</html>
